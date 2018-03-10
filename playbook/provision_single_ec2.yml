@@ -1,0 +1,19 @@
+---
+- hosts: localhost
+  connection: local
+  gather_facts: True
+
+  tasks:
+
+    - name: Provision a set of instances
+      ec2:
+        assign_public_ip: yes
+        key_name: UW2
+        group_id: sg-b8a78edc
+        instance_type: t2.micro
+        image: ami-f2d3638a
+        wait: true
+        instance_tags:
+            Name: Console
+        vpc_subnet_id: subnet-07a3ff70
+      register: ec2
