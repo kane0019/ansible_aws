@@ -9,11 +9,26 @@
       ec2:
         assign_public_ip: yes
         key_name: UW2
+        region: us-west-2
         group_id: sg-b8a78edc
         instance_type: t2.micro
+        instance_profile_name: ec2all 
         image: ami-f2d3638a
         wait: true
         instance_tags:
             Name: Console
         vpc_subnet_id: subnet-07a3ff70
       register: ec2
+
+    - name: Wait for SSH to come up
+      wait_for:
+        host: "{{ item.public_dns_name }}"
+        port: 22
+        delay: 120
+        timeout: 320
+        state: started
+      with_items: "{{ ec2.instances }}"
+
+        
+
+
