@@ -1,7 +1,6 @@
 #!/usr/bin/python
 
 import boto3,time
-from ast import literal_eval
 from sys import exit
 from ansible.module_utils.basic import *
 
@@ -11,7 +10,7 @@ def main():
     module_args = {
         'document_name':{'type':'str','required':True},
         'document_version':{'type':'str','required':True},
-        'document_parameters':{'type':'str','required':False},
+        'document_parameters':{'type':'dic','required':False},
         'region':{'type':'str','required':True}
     }
 
@@ -25,17 +24,16 @@ def main():
     # start ssm_automation execution
     try:
         response = client.start_automation_execution(
-            DocumentName = module.params['document_name'],
-            DocumentVersion = module.params['document_version'],
-            Parameters = literal_eval(module.params['document_parameters']),
-            Mode='Auto'
+        DocumentName = module.params['document_name'],
+        DocumentVersion = module.params['document_vesion'],
+        Parameters = module.params['document_parameters']
+        Mode='Auto'
     )
-    except:
-        raise
 
     # get execution ID
     execution_id = response['AutomationExecutionId']
     
+    error = 0
     
     while True:
         checker = client.describe_automation_executions(
@@ -56,8 +54,12 @@ def main():
         elif checker  == 'Success':
             break
         else:
-            sys.exit(0)
+            error = 1
+            break
       
+    if error:
+        print ("execution error!")
+        sys.exit(0)
 
     execution_result = client.describe_automation_executions(
         Filters=[

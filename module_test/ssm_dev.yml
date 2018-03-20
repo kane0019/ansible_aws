@@ -4,8 +4,15 @@
   - name: run the new module
     ssm_dev:
       document_name: 'EC2Test'
+      document_version: '2'
+      document_parameters:
+        AMIID: 
+          - 'ami-ff4ea59d'
+        InstanceType: 
+          - 't2.micro' 
       region: 'ap-southeast-2'
     register: testout
   - name: dump test output
     debug:
       msg: '{{ testout }}'
+
