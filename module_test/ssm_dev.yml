@@ -5,6 +5,7 @@
     sts_assume_role:
       role_arn: "arn:aws:iam::347004570395:role/SSM_Assume"
       role_session_name: "Session"
+      region: ap-southeast-2
     register: role
   
   - name: run the new module
