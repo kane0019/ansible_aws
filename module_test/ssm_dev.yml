@@ -6,7 +6,7 @@
       role_arn: "arn:aws:iam::347004570395:role/SSM_Assume"
       role_session_name: "Session"
     register: role
-register: assumed_role
+  
   - name: run the new module
     ssm_dev:
       aws_access_key: "{{ role.sts_creds.access_key }}"
