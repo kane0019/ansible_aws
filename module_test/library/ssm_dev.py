@@ -9,8 +9,11 @@ from ansible.module_utils.basic import *
 def main():
     # initial module with input "document_name" & "region"
     module_args = {
+        'aws_access_key':{'type':'str','required':False,'default': None},
+        'aws_secret_key':{'type':'str','required':False,'default': None},
+        'security_token':{'type':'str','required':False,'default': None},
         'document_name':{'type':'str','required':True},
-        'document_version':{'type':'str','required':True},
+        'document_version':{'type':'str','required':False},
         'document_parameters':{'type':'str','required':False},
         'region':{'type':'str','required':True}
     }
@@ -20,18 +23,14 @@ def main():
     )
 
     # call boto to retreive ssm client
-    client = boto3.client('ssm',region_name =  module.params['region'])
+    client = boto3.client('ssm', aws_access_key_id = module.params['aws_access_key'], aws_secret_access_key = module.params['aws_secret_key'], aws_session_token = module.params['security_token'], region_name =  module.params['region'])
     
     # start ssm_automation execution
-    try:
-        response = client.start_automation_execution(
+    response = client.start_automation_execution(
             DocumentName = module.params['document_name'],
-            DocumentVersion = module.params['document_version'],
             Parameters = literal_eval(module.params['document_parameters']),
             Mode='Auto'
     )
-    except:
-        raise
 
     # get execution ID
     execution_id = response['AutomationExecutionId']
