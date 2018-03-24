@@ -1,18 +1,25 @@
 ---
 - hosts: localhost
   tasks:
+  - name: sts
+    sts_assume_role:
+      role_arn: "arn:aws:iam::347004570395:role/SSM_Assume"
+      role_session_name: "Session"
+    register: role
+register: assumed_role
   - name: run the new module
     ssm_dev:
+      aws_access_key: "{{ role.sts_creds.access_key }}"
+      aws_secret_key: "{{ role.sts_creds.secret_key }}"
+      security_token: "{{ role.sts_creds.session_token }}"
       document_name: 'EC2Test'
-      document_version: '2'
       document_parameters:
-        AMIID: 
+        AMIID:
           - 'ami-ff4ea59d'
-        InstanceType: 
-          - 't2.micro' 
+        InstanceType:
+          - 't2.micro'
       region: 'ap-southeast-2'
     register: testout
   - name: dump test output
     debug:
       msg: '{{ testout }}'
-
