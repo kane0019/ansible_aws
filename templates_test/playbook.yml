@@ -1,8 +1,8 @@
 ---
   - name: Encode thing
-  shell: |
-    base64 -i scripts/echo.ps1
-  register: b64_echo_test
+    shell: |
+      base64 -i scripts/echo.ps1
+    register: b64_echo_test
 
   - name: 'Create test cloudformation from Jinja template'
     when: b64_echo|succeeds
