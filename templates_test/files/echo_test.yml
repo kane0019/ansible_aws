@@ -20,4 +20,4 @@ Resources:
               echomessage: '{{echomessage}}'
               Parameters:
                 commands:  Invoke-Expression ([System.Text.Encoding]::Unicode.GetString([Convert]::FromBase64String("ZWNobyB7eyBlY2hvX21lc3NhZ2UgfX0=")))  
-          executionTimeout: '3600'
+                executionTimeout: '3600'
