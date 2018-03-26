@@ -1,10 +1,12 @@
 ---
-- name: Encode thing
-  shell: |
-    base64 -i scripts/echo.ps1
-  register: b64_echo_test
+- hosts: localhost
+  tasks:
+  - name: 'Encode thing'
+    shell: |
+      base64 -i scripts/echo.ps1
+    register: b64_echo_test
 
-- name: 'Create test cloudformation from Jinja template'
-  when: b64_echo|succeeds
-  template: src=echo_test.yml.j2 dest=/files/echo_test.yml
-  register: render_template
+  - name: 'Create test cloudformation from Jinja template'
+    when: b64_echo_test|succeeded
+    template: src=echo_test.yml.j2 dest=./files/echo_test.yml
+    register: render_template
