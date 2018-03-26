@@ -19,5 +19,5 @@ Resources:
               DocumentName: AWS-RunPowerShellScript
               echomessage: '{{echomessage}}'
               Parameters:
-                commands:  Invoke-Expression ([System.Text.Encoding]::Unicode.GetString([Convert]::FromBase64String("ZWNobyB7eyBlY2hvX21lc3NhZ2UgfX0=")))  
+                commands:  Invoke-Expression ([System.Text.Encoding]::Unicode.GetString([Convert]::FromBase64String("ZWNobyB7eyBlY2hvbWVzc2FnZSB9fQ==")))  
                 executionTimeout: '3600'
