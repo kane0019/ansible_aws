@@ -8,16 +8,16 @@ Resources:
         schemaVersion: '0.3'
         parameters:
           echo_message:
-          type: String
-          default: 'hello-world'
+            type: String
+            default: 'hello-world'
         mainSteps:
-          - name: echo_test
+          - name: echotest
             action: aws:runCommand
             maxAttempts: 1
             onFailure: Abort
             inputs:
               DocumentName: AWS-RunPowerShellScript
-              echo_message: '{{"{{"}}echo_message{{"}}"}}'
+              echomessage: '{{"{{"}}echomessage{{"}}"}}'
               Parameters:
                 commands:  Invoke-Expression ([System.Text.Encoding]::Unicode.GetString([Convert]::FromBase64String("{{ b64_echo_test.stdout }}")))  
-            executionTimeout: '3600'
+          executionTimeout: '3600'

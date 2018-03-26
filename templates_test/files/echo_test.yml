@@ -8,10 +8,10 @@ Resources:
         schemaVersion: '0.3'
         parameters:
           echo_message:
-          type: String
-          default: 'hello-world'
+            type: String
+            default: 'hello-world'
         mainSteps:
-          - name: echo_test
+          - name: echotest
             action: aws:runCommand
             maxAttempts: 1
             onFailure: Abort
@@ -20,4 +20,4 @@ Resources:
               echo_message: '{{echo_message}}'
               Parameters:
                 commands:  Invoke-Expression ([System.Text.Encoding]::Unicode.GetString([Convert]::FromBase64String("ZWNobyB7eyBlY2hvX21lc3NhZ2UgfX0=")))  
-            executionTimeout: '3600'
+              executionTimeout: '3600'
