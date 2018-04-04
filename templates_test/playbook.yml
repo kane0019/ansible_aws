@@ -4,9 +4,9 @@
   gather_facts: True
 
   tasks:
-  - name: 'formate test'
-  - shell: cat /tmp/test.json
-    register: result
+    - name: 'formate test'
+      shell: cat /tmp/test.json
+      register: result
 
-  - set_fact:
-      myvar: "{{ result.stdout | from_json }}"
+    - name: 'print test'
+      shell: echo "{{ result.stdout | from_json }}"
