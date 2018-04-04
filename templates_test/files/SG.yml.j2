@@ -1,0 +1,17 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: VPC Template
+Resources:
+  rdsSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: test group
+      VpcId: {{ VPC_ID }}
+{% if sg_rules %}
+      SecurityGroupIngress:
+{% for rule in sg_rules %}
+        - IpProtocol: "{{ rule.protocol }}"
+          FromPort: "{{ rule.from_port }}"
+          ToPort: "{{ rule.to_port }}"
+          CidrIp: "{{ rule.cidr }}"
+{% endfor %}
+{% endif %}
