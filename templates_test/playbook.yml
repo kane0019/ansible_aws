@@ -1,12 +1,12 @@
 ---
 - hosts: localhost
-  tasks:
-  - name: 'Encode thing'
-    shell: |
-      base64 -i scripts/echo.ps1
-    register: b64_echo_test
+  connection: local
+  gather_facts: True
 
-  - name: 'Create test cloudformation from Jinja template'
-    when: b64_echo_test|succeeded
-    template: src=echo_test.yml.j2 dest=./files/echo_test.yml
-    register: render_template
+  tasks:
+  - name: 'formate test'
+  - shell: cat /tmp/test.json
+    register: result
+
+  - set_fact:
+      myvar: "{{ result.stdout | from_json }}"
