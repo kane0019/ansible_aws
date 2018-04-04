@@ -9,4 +9,4 @@
       register: result
 
     - name: 'print test'
-      shell: echo "{{ result.stdout | from_json }}"
+      shell: echo "{{ result.stdout | to_yaml }}"
