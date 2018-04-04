@@ -9,4 +9,4 @@
       register: result
 
     - name: 'print test'
-      shell: echo "{{ result.stdout | to_yaml }} >> /tmp/test.yaml"
+      shell: echo "{{ result.stdout | to_yaml }}" >> /tmp/test.yaml
