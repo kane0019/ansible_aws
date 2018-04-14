@@ -3,7 +3,7 @@ Resources:
     Type: "AWS::SSM::Document"
     Properties: 
       Content: 
-        {{ doc_contents | indent( width=8, indentfirst=True) }}
+{{ doc_contents | indent( width=8, indentfirst=True) }}
       DocumentType: Automation
       Tags:
         - Key: Name

@@ -3,7 +3,7 @@
   connection: local
   gather_facts: False
   vars:
-    doc_contents: {{ lookup('file', './ssm_doc/ssm_doc_content.yml') }}
+    doc_contents: "{{ lookup('file', './ssm_doc/ssm_doc_content.yml') }}"
   tasks:
     - name: Run template
       template:
