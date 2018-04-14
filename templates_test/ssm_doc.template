@@ -3,7 +3,6 @@ Resources:
     Type: "AWS::SSM::Document"
     Properties: 
       Content: 
-        ---
         description: Start EC2 instances(s)
         schemaVersion: '0.3'
         parameters:
