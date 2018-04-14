@@ -1,0 +1,9 @@
+Resources:
+  SSMDoc:
+    Type: "AWS::SSM::Document"
+    Properties: 
+      Content: {{ lookup('file', './ssm_doc/ssm_doc_content.yml') }}
+      DocumentType: Automation
+      Tags:
+        - Key: Name
+          Value: TestDoc

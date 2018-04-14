@@ -1,0 +1,24 @@
+---
+description: Start EC2 instances(s)
+schemaVersion: '0.3'
+parameters:
+  AMIID:
+    type: String
+    description: AMI
+  InstanceType:
+    type: String
+    description: Instnace_Type
+mainSteps:
+- name: launchInstance
+  action: aws:runInstances
+  maxAttempts: 1
+  timeoutSeconds: 1200
+  onFailure: Abort
+  inputs:
+    ImageId: "{{AMIID}}"
+    InstanceType: "{{InstanceType}}"
+    MinInstanceCount: 1
+    MaxInstanceCount: 1
+    IamInstanceProfileName: ec2all
+outputs:
+- launchInstance.InstanceIds

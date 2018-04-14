@@ -7,5 +7,5 @@
   tasks:
     - name: Run template
       template:
-          src: "files/SG.yml.j2"
-          dest: "./SG.template"
+          src: "files/ssm_doc.yml.j2"
+          dest: "./ssm_doc.template"
