@@ -2,7 +2,8 @@ Resources:
   SSMDoc:
     Type: "AWS::SSM::Document"
     Properties: 
-      Content: {{ lookup('file', './ssm_doc/ssm_doc_content.yml') }}
+      Content: 
+        {{ doc_contents | indent( width=8, indentfirst=True) }}
       DocumentType: Automation
       Tags:
         - Key: Name
